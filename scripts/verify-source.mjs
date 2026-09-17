@@ -65,6 +65,50 @@ for (const legacyImport of legacyHomeImports) {
 }
 
 const homepageSource = fs.readFileSync(path.join(root, "components/home/HomePage.tsx"), "utf8");
+
+const activeHomepageSources = [
+  ["app/[lng]/(site)/page.tsx", homeEntry],
+  ["components/home/HomePage.tsx", homepageSource],
+];
+
+function collectModulePaths(source) {
+  const paths = [];
+
+  const fromPattern = /\bfrom\s+["']([^"']+)["']/g;
+  const sideEffectPattern = /^\s*import\s*["']([^"']+)["']/gm;
+  const dynamicImportPattern = /\bimport\s*\(\s*["']([^"']+)["']\s*\)/g;
+
+  for (const pattern of [
+    fromPattern,
+    sideEffectPattern,
+    dynamicImportPattern,
+  ]) {
+    for (const match of source.matchAll(pattern)) {
+      paths.push(match[1]);
+    }
+  }
+
+  return [...new Set(paths)];
+}
+
+function isForbiddenHomepageModulePath(modulePath) {
+  return (
+    modulePath.includes(".backup-") ||
+    modulePath.includes("MIE-MATCHA-") ||
+    modulePath.includes("MATCHA-") ||
+    /^@\/components\/home\/v\d+(?:\/|$)/i.test(modulePath)
+  );
+}
+
+for (const [file, source] of activeHomepageSources) {
+  for (const modulePath of collectModulePaths(source)) {
+    if (isForbiddenHomepageModulePath(modulePath)) {
+      fail(
+        `Active Homepage imports forbidden legacy/patch source: ${file} -> ${modulePath}`,
+      );
+    }
+  }
+}
 if (!/export\s+async\s+function\s+HomePage|export\s+function\s+HomePage/.test(homepageSource)) {
   fail("components/home/HomePage.tsx must export HomePage.");
 }
@@ -163,6 +207,15 @@ if (leftovers.length) fail(`Legacy homepage source still present:\n${leftovers.j
 
 const textExtensions = new Set([".ts", ".tsx", ".js", ".mjs", ".json", ".css", ".md", ".sql"]);
 const ignoredDirs = new Set(["node_modules", ".next", ".git", ".vercel", "out"]);
+
+function shouldIgnoreDirectory(name) {
+  return (
+    ignoredDirs.has(name) ||
+    name.startsWith(".backup-") ||
+    name.startsWith("MIE-MATCHA-") ||
+    name.startsWith("MATCHA-")
+  );
+}
 const suspicious = [
   "\uFFFD",
   "\u00C3\u00A1",
@@ -191,7 +244,7 @@ const suspicious = [
 function walk(dir) {
   const out = [];
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (ignoredDirs.has(entry.name) || entry.name.startsWith(".backup-")) continue;
+    if (shouldIgnoreDirectory(entry.name)) continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) out.push(...walk(full));
     else if (textExtensions.has(path.extname(entry.name))) out.push(full);
