@@ -1,0 +1,151 @@
+.section {
+  background: var(--paper);
+}
+
+.section :global(.section-heading) h2 {
+  color: var(--tea-brown);
+  line-height: 0.94;
+}
+
+.archive {
+  border-top: 1px solid var(--line);
+}
+
+.row {
+  min-height: 126px;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1.45fr) minmax(0, 0.8fr) 170px 48px;
+  gap: 20px;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.25s ease;
+}
+
+.row:hover {
+  background: rgba(208, 224, 179, 0.5);
+}
+
+.index {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+.name {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.japanese {
+  flex: 0 0 auto;
+  font-family: var(--jp);
+  font-size: 31px;
+  letter-spacing: 0.04em;
+}
+
+.name h3 {
+  min-width: 0;
+  color: var(--tea-brown);
+  font-family: var(--serif);
+  font-size: clamp(30px, 2.5vw, 44px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+.region {
+  font-size: 10px;
+  line-height: 1.6;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--tea-brown-muted);
+}
+
+.logo {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+}
+
+.link {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.link:hover {
+  transform: translateY(-1px);
+  background: var(--matcha-soft);
+  border-color: rgba(59, 44, 25, 0.42);
+}
+
+:global(html[lang="vi"]) .name h3 {
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
+  text-wrap: balance;
+}
+
+@media (max-width: 1180px) {
+  .row {
+    grid-template-columns: 54px minmax(0, 1.4fr) minmax(0, 0.8fr) 48px;
+  }
+
+  .logo {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .row {
+    min-height: 104px;
+    grid-template-columns: 38px minmax(0, 1fr) 42px;
+    gap: 10px;
+  }
+
+  .region,
+  .logo {
+    display: none;
+  }
+
+  .name {
+    gap: 10px;
+  }
+
+  .name h3 {
+    font-size: 24px;
+  }
+
+  .japanese {
+    font-size: 22px;
+  }
+
+  .link {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row,
+  .link {
+    transition: none !important;
+  }
+
+  .link:hover {
+    transform: none !important;
+  }
+}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500">
+<defs><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="7"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .05 0"/></filter></defs>
+<rect width="1200" height="1500" fill="#C9D7B1"/>
+<rect x="70" y="70" width="1060" height="1360" fill="none" stroke="#3B2C19" stroke-width="2" opacity=".55"/>
+<circle cx="600" cy="655" r="330" fill="#EDEAE5" opacity=".88"/>
+<circle cx="600" cy="655" r="245" fill="#75A35B"/>
+<circle cx="600" cy="655" r="205" fill="#6B9852"/>
+<path d="M430 690c90-110 265-160 360-24-107 88-242 121-360 24Z" fill="#8CB26D" opacity=".9"/>
+<path d="M445 694c82-66 227-102 331-32" fill="none" stroke="#E9E5D9" stroke-width="7" stroke-linecap="round" opacity=".8"/>
+<text x="115" y="175" font-family="serif" font-size="34" fill="#3B2C19" letter-spacing="8">TEA ARCHIVE / JAPAN</text>
+<text x="600" y="1130" text-anchor="middle" font-family="serif" font-size="150" fill="#3B2C19">和光</text>
+<text x="600" y="1220" text-anchor="middle" font-family="serif" font-size="55" fill="#3B2C19" letter-spacing="11">WAKO</text>
+<text x="600" y="1320" text-anchor="middle" font-family="sans-serif" font-size="24" fill="#3B2C19" letter-spacing="6">MATCHA PROFILE / REFERENCE VISUAL</text>
+<rect width="1200" height="1500" filter="url(#grain)" opacity=".5"/>
+</svg>
