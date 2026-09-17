@@ -45,6 +45,8 @@ type Props = {
   exploreProfileLabel: string;
   referencePriceLabel: string;
   autoSwitchLabel: string;
+  previousLabel: string;
+  nextLabel: string;
   dragLabel: string;
 };
 
@@ -106,6 +108,8 @@ export function HeroCollectionCarousel({
   exploreProfileLabel,
   referencePriceLabel,
   autoSwitchLabel,
+  previousLabel,
+  nextLabel,
   dragLabel,
 }: Props) {
   const [heroIndex, setHeroIndex] = useState(0);
@@ -162,7 +166,7 @@ export function HeroCollectionCarousel({
   return (
     <section className={styles.showcase} aria-labelledby="home-title">
       <div className={styles.heroSide}>
-        <div ref={heroRef} className={`keen-slider ${styles.heroSlider}`} aria-roledescription="carousel">
+        <div ref={heroRef} className={`keen-slider ${styles.heroSlider}`} aria-roledescription="carousel" aria-label={autoSwitchLabel}>
           {heroSlides.map((slide, index) => (
             <article key={`${slide.src}-${index}`} className={`keen-slider__slide ${styles.heroSlide}`}>
               <Image
@@ -201,7 +205,7 @@ export function HeroCollectionCarousel({
               />
             ))}
           </div>
-          <span>{autoSwitchLabel}</span>
+          <span aria-hidden="true">{String(heroIndex + 1).padStart(2, "0")} / {String(heroSlides.length).padStart(2, "0")}</span>
         </div>
       </div>
 
@@ -220,24 +224,24 @@ export function HeroCollectionCarousel({
                   type="button"
                   onClick={() => productInstance.current?.prev()}
                   disabled={productIndex <= 0}
-                  aria-label="Previous matcha profiles"
+                  aria-label={previousLabel}
                 >
-                  <ArrowLeft size={16} />
+                  <ArrowLeft size={16} aria-hidden="true" />
                 </button>
                 <button
                   type="button"
                   onClick={() => productInstance.current?.next()}
                   disabled={productIndex >= productMax}
-                  aria-label="Next matcha profiles"
+                  aria-label={nextLabel}
                 >
-                  <ArrowRight size={16} />
+                  <ArrowRight size={16} aria-hidden="true" />
                 </button>
               </div>
             </div>
           </div>
         </header>
 
-        <div ref={productRef} className={`keen-slider ${styles.productSlider}`} aria-roledescription="carousel">
+        <div ref={productRef} className={`keen-slider ${styles.productSlider}`} aria-roledescription="carousel" aria-label={collectionTitle}>
           {products.map((product) => (
             <div key={product.id} className={`keen-slider__slide ${styles.productSlide}`}>
               <Link href={product.href} className={styles.productCard} aria-label={`${exploreProfileLabel}: ${product.name}`}>

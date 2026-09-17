@@ -2,13 +2,15 @@
   --paper: #edeae5;
   --cream: #f4f1eb;
   --soft: #d0e0b3;
+  --matcha: #75a35b;
   --green: #315c43;
   --green-deep: #263f31;
   --brown: #3b2c19;
   --muted: #74695c;
   --clay: #704938;
   --line: rgba(59, 44, 25, 0.2);
-  --hairline: rgba(59, 44, 25, 0.12);
+  --line-soft: rgba(59, 44, 25, 0.11);
+  --paper-line: rgba(255, 255, 255, 0.16);
   --serif: "Cormorant Garamond", Georgia, serif;
   --sans: "Be Vietnam Pro", Inter, sans-serif;
   --jp: "Noto Serif JP", serif;
@@ -21,7 +23,9 @@
 
 .root *,
 .root *::before,
-.root *::after { box-sizing: border-box; }
+.root *::after {
+  box-sizing: border-box;
+}
 
 .root h1,
 .root h2,
@@ -31,12 +35,25 @@
 .root ul,
 .root ol,
 .root dl,
-.root dd { margin: 0; }
+.root dd,
+.root dt {
+  margin: 0;
+}
 
 .root ul,
-.root ol { list-style: none; padding: 0; }
-.root a { color: inherit; text-decoration: none; }
-.root img { image-rendering: auto; }
+.root ol {
+  padding: 0;
+  list-style: none;
+}
+
+.root a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.root img {
+  image-rendering: auto;
+}
 
 .root h1,
 .root h2,
@@ -60,1509 +77,231 @@
   hyphens: none;
 }
 
-.root a:focus-visible {
+.root a:focus-visible,
+.root [tabindex]:focus-visible {
   outline: 2px solid var(--clay);
-  outline-offset: 3px;
+  outline-offset: 4px;
 }
 
 .folio {
-  width: min(1540px, 100%);
+  width: min(1600px, 100%);
   margin-inline: auto;
-  background: var(--paper);
-  box-shadow: 0 0 0 0.5px rgba(255,255,255,.16);
-}
-
-.coverImage,
-.productImageCover { object-fit: cover; }
-.productImageContain { object-fit: contain; padding: clamp(.85rem, 1.3vw, 1.35rem); }
-
-.eyebrow,
-.eyebrowLight {
-  font-size: .68rem;
-  line-height: 1.5;
-  letter-spacing: .16em;
-  font-weight: 600;
-}
-.eyebrow { color: var(--green); }
-.eyebrowLight { color: rgba(244,241,235,.9); }
-
-.textLink {
-  width: fit-content;
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  padding-bottom: .22rem;
-  border-bottom: .5px solid currentColor;
-  font-size: .74rem;
-  font-weight: 600;
-}
-
-/* TOP COMPOSITION */
-.heroCollection {
-  display: grid;
-  grid-template-columns: minmax(0, 1.14fr) minmax(28rem, .86fr);
-  min-height: 690px;
-  border-bottom: .5px solid var(--line);
-}
-
-.heroPanel {
-  position: relative;
-  min-height: 690px;
-  overflow: hidden;
-  background: var(--green-deep);
-}
-
-.heroShade {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(24,36,27,.78) 0%, rgba(24,36,27,.46) 42%, rgba(24,36,27,.04) 72%);
-}
-
-.heroCopy {
-  position: absolute;
-  z-index: 2;
-  left: clamp(2rem, 4vw, 4.8rem);
-  bottom: clamp(2.4rem, 5vw, 5rem);
-  width: min(34rem, calc(100% - 4rem));
-  color: var(--cream);
-}
-
-.heroCopy h1 {
-  margin-top: 1rem;
-  max-width: 9.2ch;
-  font-size: clamp(3.25rem, 4.8vw, 5.9rem);
-  line-height: .94;
-  letter-spacing: -.025em;
-}
-
-.heroLead {
-  max-width: 30rem;
-  margin-top: 1.25rem !important;
-  color: rgba(244,241,235,.9);
-  font-size: clamp(.92rem, .88rem + .12vw, 1rem);
-  line-height: 1.72;
-}
-
-.heroCta {
-  margin-top: 1.65rem;
-  display: inline-flex;
-  align-items: center;
-  gap: .65rem;
-  min-height: 3rem;
-  padding-inline: 1.15rem;
-  border: .5px solid rgba(244,241,235,.72);
-  background: rgba(38,63,49,.44);
-  color: var(--cream) !important;
-  font-size: .74rem;
-  font-weight: 600;
-}
-
-.heroVerticalNote {
-  position: absolute;
-  z-index: 2;
-  right: 1.35rem;
-  top: 2rem;
-  writing-mode: vertical-rl;
-  font-family: var(--jp);
-  color: rgba(244,241,235,.84);
-  font-size: .9rem;
-  letter-spacing: .12em;
-}
-
-.collectionPanel {
-  padding: clamp(1.8rem, 3vw, 3rem);
-  background: var(--cream);
-}
-
-.collectionHeader {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(12rem, .7fr);
-  gap: 1.5rem;
-  align-items: end;
-  padding-bottom: 1.35rem;
-  border-bottom: .5px solid var(--line);
-}
-
-.collectionHeader h2 {
-  margin-top: .45rem;
-  font-size: clamp(2rem, 2.2vw, 3rem);
-  line-height: 1;
-}
-
-.collectionHeader > p {
-  color: var(--muted);
-  font-size: .78rem;
-  line-height: 1.7;
-}
-
-.collectionGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: .9rem;
-  margin-top: 1.2rem;
-}
-
-.productCard {
-  display: block;
-  min-width: 0;
-  border: .5px solid var(--hairline);
-  background: rgba(237,234,229,.58);
-  transition: border-color 160ms ease, background 160ms ease;
-}
-.productCard:hover { border-color: rgba(59,44,25,.36); background: var(--paper); }
-
-.productMedia {
-  position: relative;
-  aspect-ratio: 1 / .76;
-  overflow: hidden;
-  background: #e8e4dc;
-  border-bottom: .5px solid var(--hairline);
-}
-
-.productCopy { padding: .72rem .76rem .78rem; }
-.productBrand { color: var(--muted); font-size: .56rem; line-height: 1.45; letter-spacing: .04em; }
-.productCopy h3 { margin-top: .28rem; font-size: clamp(1rem, .94rem + .16vw, 1.18rem); line-height: 1.04; }
-.productSummary {
-  display: -webkit-box;
-  margin-top: .35rem !important;
-  color: var(--muted);
-  font-size: .63rem;
-  line-height: 1.45;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.productFooter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: .5rem;
-  margin-top: .55rem;
-  padding-top: .52rem;
-  border-top: .5px solid var(--hairline);
-  color: var(--brown);
-  font-size: .62rem;
-}
-.productPrice { font-variant-numeric: tabular-nums; }
-.productFallback { position:absolute; inset:0; display:grid; place-items:center; padding:1rem; font-family:var(--jp); color:var(--green); }
-
-/* ORIGIN STRIP */
-.originStrip {
-  display: grid;
-  grid-template-columns: minmax(18rem, .72fr) minmax(0, 1.28fr);
-  border-bottom: .5px solid var(--line);
-}
-.originCopy {
-  padding: clamp(2.5rem, 5vw, 5rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: var(--paper);
-}
-.originCopy h2 { margin-top:.6rem; max-width:12ch; font-size:clamp(2.2rem,3vw,3.7rem); line-height:1; }
-.originCopy > p:not(.eyebrow) { margin-top:1rem !important; max-width:30rem; color:var(--muted); font-size:.9rem; line-height:1.75; }
-.originCopy .textLink { margin-top:1.35rem; }
-.originMosaic { display:grid; grid-template-columns:1.35fr .65fr; grid-template-rows:repeat(2,minmax(12rem,1fr)); gap:.5rem; padding:.5rem; background:var(--cream); }
-.originMosaic figure { position:relative; min-height:0; overflow:hidden; }
-.originLarge { grid-row:1 / 3; }
-
-/* TASTE + SPECTRUM */
-.tasteSpectrum {
-  display: grid;
-  grid-template-columns: minmax(15.5rem, .58fr) minmax(21rem, .82fr) minmax(28rem, 1.15fr);
-  align-items: stretch;
-  border-top: .5px solid var(--line);
-  border-bottom: .5px solid var(--line);
-  background: color-mix(in srgb, var(--paper) 95%, white 5%);
-}
-
-.tasteIntro,
-.tasteList,
-.spectrumPlate {
-  min-width: 0;
-}
-
-.tasteIntro {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: clamp(2.2rem, 3.4vw, 3.8rem) clamp(1.7rem, 3vw, 3rem);
-  border-right: .5px solid var(--line);
-}
-
-.tasteIntro h2 {
-  margin-top: .7rem;
-  max-width: 8.5ch;
-  font-size: clamp(2.2rem, 2.7vw, 3.35rem);
-  line-height: .98;
-  letter-spacing: -.018em;
-}
-
-.tasteIntro > p:not(.eyebrow) {
-  max-width: 18rem;
-  margin-top: 1.15rem !important;
-  color: var(--muted);
-  font-size: .84rem;
-  line-height: 1.7;
-}
-
-.tasteList {
-  padding: 1.1rem 0;
-  border-right: .5px solid var(--line);
-}
-
-.tasteList li {
-  margin-inline: clamp(1rem, 2vw, 1.6rem);
-}
-
-.tasteList li + li {
-  border-top: .5px solid var(--line);
-}
-
-.tasteCard {
-  position: relative;
-  display: grid;
-  grid-template-columns: 4.4rem minmax(0, 1fr) auto;
-  gap: .9rem;
-  align-items: center;
-  min-height: 6.65rem;
-  padding: .8rem .25rem;
-  transition: background-color 160ms ease, color 160ms ease, padding-inline 160ms ease;
-}
-
-.tasteCard::before {
-  content: "";
-  position: absolute;
-  inset: .35rem -.55rem;
-  z-index: -1;
-  background: rgba(208, 224, 179, 0);
-  transition: background-color 160ms ease;
-}
-
-.tasteCard:hover::before,
-.tasteCard:focus-visible::before {
-  background: rgba(208, 224, 179, .34);
-}
-
-.tasteCard:hover,
-.tasteCard:focus-visible {
-  color: var(--green);
-}
-
-.tasteCard figure {
-  position: relative;
-  aspect-ratio: 1;
-  overflow: hidden;
-  background: var(--cream);
-  box-shadow: inset 0 0 0 .5px var(--line);
-}
-
-.tasteCard h3 {
-  font-size: clamp(1.05rem, 1rem + .18vw, 1.2rem);
-  line-height: 1.08;
-}
-
-.tasteCard p {
-  margin-top: .22rem !important;
-  color: var(--muted);
-  font-size: .64rem;
-  line-height: 1.5;
-}
-
-.spectrumPlate {
-  margin: 0;
-  padding: clamp(2.2rem, 3.4vw, 3.8rem) clamp(1.9rem, 3vw, 3.25rem);
-  background: color-mix(in srgb, var(--cream) 88%, white 12%);
-}
-
-.spectrumPlate figcaption {
-  display: flex;
-  align-items: flex-start;
-  gap: .9rem;
-  padding-bottom: 1.45rem;
-  border-bottom: .5px solid var(--line);
-}
-
-.spectrumKanji {
-  margin-top: .1rem;
-  font-family: var(--jp);
-  font-size: 1.9rem;
-  color: var(--green);
-  line-height: 1;
-}
-
-.spectrumPlate figcaption h2 {
-  margin-top: .24rem;
-  font-size: clamp(1.75rem, 1.6rem + .55vw, 2.25rem);
-  line-height: 1.02;
-  letter-spacing: -.012em;
-}
-
-.axisList {
-  padding-top: .1rem;
-}
-
-.axisRow {
-  display: grid;
-  grid-template-columns: minmax(7.8rem, .33fr) minmax(0, 1fr);
-  gap: clamp(1.35rem, 2vw, 2.25rem);
-  align-items: center;
-  min-height: 6.9rem;
-  border-bottom: .5px solid var(--line);
-}
-
-.axisRow:last-child {
-  border-bottom: 0;
-}
-
-.axisRow dt strong {
-  display: block;
-  font-family: var(--serif);
-  font-size: clamp(1.16rem, 1.08rem + .22vw, 1.34rem);
-  line-height: 1.05;
-  font-weight: 500;
-}
-
-.axisRow dt span {
-  display: block;
-  margin-top: .3rem;
-  color: var(--muted);
-  font-size: .58rem;
-  line-height: 1.4;
-}
-
-.axisRow dd {
-  min-width: 0;
-}
-
-.axisTrack {
-  --axis-x: 50%;
-  position: relative;
-  height: .38rem;
-  border: .5px solid rgba(59, 44, 25, .58);
-  border-radius: 999px;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(117, 163, 91, .76) 0,
-      rgba(117, 163, 91, .76) var(--axis-x),
-      rgba(244, 241, 235, .82) var(--axis-x),
-      rgba(244, 241, 235, .82) 100%
-    );
-}
-
-.axisTrackEmpty {
-  background: rgba(244, 241, 235, .82);
-  border-color: rgba(59, 44, 25, .35);
-}
-
-.axisStart,
-.axisMid,
-.axisEnd {
-  display: none;
-}
-
-.axisDot,
-.axisMissing {
-  position: absolute;
-  top: 50%;
-  left: var(--axis-x);
-  width: 1.22rem;
-  height: 1.22rem;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.axisDot {
-  background: #8ea76d;
-  border: 1px solid rgba(49, 92, 67, .9);
-  box-shadow: 0 1px 3px rgba(59, 44, 25, .2);
-}
-
-.axisMissing {
-  left: 50%;
-  width: .85rem;
-  height: .85rem;
-  border: .5px dashed rgba(59, 44, 25, .42);
-  background: var(--cream);
-  box-shadow: none;
-}
-
-.axisLabels {
-  display: flex;
-  justify-content: space-between;
-  margin-top: .42rem;
-  color: var(--muted);
-  font-size: .56rem;
-  line-height: 1.3;
-}
-
-.axisValue {
-  display: block;
-  min-height: .95rem;
-  margin-top: .34rem;
-  color: var(--muted);
-  font-size: .56rem;
-  line-height: 1.4;
-  font-variant-numeric: tabular-nums;
-}
-
-@media (max-width: 1180px) and (min-width: 1051px) {
-  .tasteSpectrum {
-    grid-template-columns: minmax(14rem, .52fr) minmax(19rem, .76fr) minmax(25rem, 1.1fr);
-  }
-  .tasteIntro,
-  .spectrumPlate {
-    padding-inline: 1.6rem;
-  }
-  .tasteCard {
-    grid-template-columns: 4rem minmax(0, 1fr) auto;
-  }
-}
-
-/* BRANDS */
-.brandSection { display:grid; grid-template-columns:minmax(15rem,.52fr) minmax(0,1.48fr); gap:clamp(2rem,4vw,4rem); padding:clamp(3rem,5vw,5rem); border-bottom:.5px solid var(--line); }
-.brandSection header h2 { margin-top:.5rem; max-width:9ch; font-size:clamp(2rem,2.6vw,3.2rem); line-height:1; }
-.brandList { border-top:.5px solid var(--line); }
-.brandList li { border-bottom:.5px solid var(--line); }
-.brandRow { min-height:4.8rem; display:grid; grid-template-columns:minmax(0,1fr) minmax(7rem,.3fr) auto; gap:1rem; align-items:center; }
-.brandRow div { display:flex; align-items:baseline; gap:.7rem; min-width:0; }
-.brandRow div span { font-family:var(--jp); color:var(--green); font-size:.82rem; }
-.brandRow strong { font-family:var(--serif); font-size:1.25rem; font-weight:500; }
-.brandRow > span { color:var(--muted); font-size:.66rem; }
-.brandAction { display:inline-flex; align-items:center; gap:.4rem; }
-
-/* MODERN RITUAL */
-.modernRitualSection {
-  padding: clamp(3rem, 5vw, 5rem);
-  color: var(--brown);
-  background: var(--cream);
-  border-bottom: .5px solid var(--line);
-}
-.modernRitualHeader {
-  display: grid;
-  grid-template-columns: minmax(0, .86fr) minmax(20rem, .58fr);
-  gap: clamp(2rem, 5vw, 5rem);
-  align-items: end;
-  padding-bottom: 1.35rem;
-  border-bottom: .5px solid var(--line);
-}
-.modernRitualHeader h2 {
-  margin-top: .5rem;
-  max-width: 14ch;
-  font-size: clamp(2rem, 2.6vw, 3.25rem);
-  line-height: 1.02;
-  letter-spacing: -.018em;
-}
-.modernRitualHeader > p {
-  max-width: 34rem;
-  justify-self: end;
-  color: var(--muted);
-  font-size: .82rem;
-  line-height: 1.72;
-}
-.modernRitualVisualScroller {
-  margin-top: 1.2rem;
-  overflow-x: auto;
-  overscroll-behavior-inline: contain;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(59,44,25,.35) transparent;
-}
-.modernRitualVisualScroller:focus-visible {
-  outline: 1px solid var(--green);
-  outline-offset: 4px;
-}
-.modernRitualVisual {
-  position: relative;
-  width: 100%;
-  min-width: 760px;
-  aspect-ratio: 3 / 1;
-  overflow: hidden;
-  background: var(--paper);
-  border: .5px solid var(--line);
-}
-.modernRitualArtwork {
-  object-fit: cover;
-  object-position: center;
-  image-rendering: auto;
-}
-.modernRitualSteps {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-top: 1rem;
-  border-top: .5px solid var(--line);
-  border-left: .5px solid var(--line);
-}
-.modernRitualStep {
-  min-height: 8.4rem;
-  display: grid;
-  grid-template-columns: 2.25rem minmax(0, 1fr);
-  gap: .7rem;
-  align-content: start;
-  padding: 1rem;
-  border-right: .5px solid var(--line);
-  border-bottom: .5px solid var(--line);
-  background: rgba(237,234,229,.38);
-}
-.modernRitualNumber {
-  padding-top: .08rem;
-  color: var(--green);
-  font-family: var(--serif);
-  font-size: 1.3rem;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-.modernRitualStep h3 {
-  font-size: clamp(1.15rem, 1.05rem + .24vw, 1.4rem);
-  line-height: 1.05;
-}
-.modernRitualStep p {
-  margin-top: .4rem !important;
-  color: var(--muted);
-  font-size: .68rem;
-  line-height: 1.52;
-}
-
-/* JOURNAL */
-.journalSection { padding:clamp(3rem,5vw,5rem); background:var(--paper); }
-.journalSection > header { display:grid; grid-template-columns:minmax(0,1fr) minmax(18rem,.62fr); gap:2rem; align-items:end; padding-bottom:1.5rem; border-bottom:.5px solid var(--line); }
-.journalSection > header h2 { margin-top:.5rem; max-width:10ch; font-size:clamp(2.1rem,2.8vw,3.4rem); line-height:1; }
-.journalSection > header > p:last-child { color:var(--muted); font-size:.82rem; line-height:1.7; }
-.journalFeature { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(18rem,.8fr); border-bottom:.5px solid var(--line); }
-.journalFeature > figure { position:relative; min-height:26rem; overflow:hidden; background:var(--cream); }
-.journalFeature > div { display:flex; flex-direction:column; justify-content:center; padding:clamp(2rem,4vw,4rem); }
-.journalFeature h3 { margin-top:.5rem; max-width:10ch; font-size:clamp(2rem,2.4vw,3rem); line-height:1; }
-.journalFeature .textLink { margin-top:1.3rem; }
-.journalList { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); }
-.journalList li { border-right:.5px solid var(--line); border-bottom:.5px solid var(--line); }
-.journalList a { min-height:9rem; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:.7rem; align-items:end; padding:1rem; }
-.journalList h3 { font-size:1.1rem; line-height:1.05; }
-.journalList p { margin-top:.35rem !important; color:var(--muted); font-size:.64rem; line-height:1.45; }
-
-@media (max-width: 1050px) {
-  .heroCollection { grid-template-columns:1fr; }
-  .heroPanel { min-height:620px; }
-  .collectionPanel { border-top:.5px solid var(--line); }
-  .originStrip { grid-template-columns:1fr; }
-  .tasteSpectrum { grid-template-columns:minmax(15rem,.64fr) minmax(0,1fr); }
-  .tasteIntro { border-bottom:.5px solid var(--line); }
-  .tasteList { border-right:0; }
-  .spectrumPlate { grid-column:1/-1; border-top:.5px solid var(--line); }
-  .brandSection { grid-template-columns:1fr; }
-  .modernRitualSteps { grid-template-columns:repeat(2,minmax(0,1fr)); }
-}
-
-@media (max-width: 720px) {
-  .root { padding-inline:0; }
-  .heroPanel { min-height:560px; }
-  .heroShade { background:linear-gradient(0deg,rgba(24,36,27,.78),rgba(24,36,27,.14) 70%); }
-  .heroCopy { left:1rem; right:1rem; bottom:1.3rem; width:auto; }
-  .heroCopy h1 { max-width:9ch; font-size:clamp(2.7rem,12vw,4rem); }
-  .heroVerticalNote { display:none; }
-  .collectionPanel { padding:1rem; }
-  .collectionHeader { grid-template-columns:1fr; gap:.7rem; }
-  .collectionGrid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:.65rem; }
-  .productSummary { display:none; }
-  .originCopy { padding:2rem 1rem; }
-  .originMosaic { grid-template-columns:1fr 1fr; grid-template-rows:14rem 10rem; }
-  .originLarge { grid-column:1/-1; grid-row:auto; }
-  .tasteSpectrum { grid-template-columns:1fr; }
-  .tasteIntro,.tasteList,.spectrumPlate { border-right:0; }
-  .tasteIntro { padding:2rem 1rem 1.6rem; }
-  .tasteList { padding:.55rem 0; border-top:.5px solid var(--line); }
-  .tasteList li { margin-inline:1rem; }
-  .spectrumPlate { grid-column:auto; padding:2rem 1rem; border-top:.5px solid var(--line); }
-  .tasteCard { grid-template-columns:4.25rem minmax(0,1fr) auto; min-height:5.9rem; }
-  .axisRow { grid-template-columns:1fr; gap:.8rem; min-height:6.4rem; padding-block:1rem; }
-  .brandSection { padding:2rem 1rem; }
-  .brandRow { grid-template-columns:minmax(0,1fr) auto; }
-  .brandRow > span:not(.brandAction) { display:none; }
-  .brandAction { font-size:0; gap:0; }
-  .modernRitualSection { padding:2rem 1rem; }
-  .modernRitualHeader { grid-template-columns:1fr; gap:.8rem; }
-  .modernRitualHeader > p { justify-self:start; }
-  .modernRitualVisual { min-width:860px; }
-  .modernRitualSteps { grid-template-columns:1fr 1fr; }
-  .journalSection { padding:2rem 1rem; }
-  .journalSection > header { grid-template-columns:1fr; gap:.8rem; }
-  .journalFeature { grid-template-columns:1fr; }
-  .journalFeature > figure { min-height:20rem; }
-  .journalList { grid-template-columns:1fr 1fr; }
-}
-
-@media (max-width: 480px) {
-  .modernRitualSteps { grid-template-columns:1fr; }
-  .collectionGrid { grid-template-columns:1fr; }
-  .journalList { grid-template-columns:1fr; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .root *,
-  .root *::before,
-  .root *::after {
-    animation-duration:.01ms !important;
-    animation-iteration-count:1 !important;
-    transition-duration:.01ms !important;
-    scroll-behavior:auto !important;
-  }
-}
-
-/* MIE MATCHA CONTENT LAYOUT V4.1 START */
-
-/* Discovery + spectrum: compact editorial spread. */
-.tasteSpectrum {
-  display: grid;
-  grid-template-columns: minmax(15.5rem, .62fr) minmax(20rem, .92fr) minmax(24rem, 1.16fr);
-  align-items: stretch;
-  background: var(--paper);
-  border-top: .5px solid var(--line);
-  border-bottom: .5px solid var(--line);
-}
-.tasteIntro,
-.tasteList,
-.spectrumPlate { padding: clamp(1.6rem, 2.4vw, 2.5rem); }
-.tasteIntro {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-right: .5px solid var(--line);
-}
-.tasteIntro h2 {
-  margin-top: .55rem;
-  max-width: 11ch;
-  font-size: clamp(2rem, 2.45vw, 3rem);
-  line-height: 1.03;
-  letter-spacing: -.016em;
-}
-.tasteIntro > p:not(.eyebrow) {
-  max-width: 23rem;
-  margin-top: .9rem !important;
-  color: var(--muted);
-  font-size: .78rem;
-  line-height: 1.7;
-}
-.tasteList {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-right: .5px solid var(--line);
-}
-.tasteList li + li { border-top: .5px solid var(--line); }
-.tasteCard {
-  min-height: 5rem;
-  display: grid;
-  grid-template-columns: 4.2rem minmax(0, 1fr) auto;
-  gap: .8rem;
-  align-items: center;
-  padding: .65rem 0;
-}
-.tasteCard figure {
-  position: relative;
-  width: 4.2rem;
-  aspect-ratio: 1;
-  overflow: hidden;
-  background: var(--cream);
-  border: .5px solid var(--line);
-}
-.tasteCard h3 { font-size: 1.08rem; line-height: 1.08; }
-.tasteCard p {
-  margin-top: .2rem !important;
-  color: var(--muted);
-  font-size: .62rem;
-  line-height: 1.46;
-}
-.spectrumPlate {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: rgba(244, 241, 235, .72);
-}
-.spectrumPlate figcaption {
-  display: flex;
-  align-items: flex-start;
-  gap: .9rem;
-  padding-bottom: .9rem;
-  border-bottom: .5px solid var(--line);
-}
-.spectrumKanji {
-  font-family: var(--jp);
-  font-size: 1.8rem;
-  color: var(--green);
-  line-height: 1;
-}
-.spectrumPlate figcaption h2 {
-  margin-top: .2rem;
-  font-size: clamp(1.55rem, 1.8vw, 2.15rem);
-  line-height: 1.04;
-}
-.axisList { padding-top: .2rem; }
-.axisRow {
-  display: grid;
-  grid-template-columns: minmax(5.8rem, .3fr) minmax(0, 1fr);
-  gap: .9rem;
-  align-items: center;
-  min-height: 4.8rem;
-  border-bottom: .5px solid var(--line);
-}
-.axisRow:last-child { border-bottom: 0; }
-.axisRow dt strong {
-  display: block;
-  font-family: var(--serif);
-  font-size: 1.05rem;
-  font-weight: 500;
-}
-.axisRow dt span {
-  display: block;
-  margin-top: .18rem;
-  color: var(--muted);
-  font-size: .55rem;
-}
-.axisValue {
-  display: block;
-  margin-top: .26rem;
-  color: var(--muted);
-  font-size: .55rem;
-  line-height: 1.35;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Ritual: copy below mirrors all 5 stages shown in the infographic. */
-.modernRitualHeader h2 { max-width: 15ch; }
-.modernRitualSteps { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-.modernRitualStep {
-  min-height: 8.2rem;
-  grid-template-columns: 1.8rem minmax(0, 1fr);
-  gap: .55rem;
-  padding: .9rem;
-}
-.modernRitualNumber { font-size: 1.05rem; }
-.modernRitualStep h3 {
-  font-size: clamp(1rem, .94rem + .16vw, 1.18rem);
-  line-height: 1.08;
-}
-.modernRitualStep p {
-  margin-top: .34rem !important;
-  font-size: .62rem;
-  line-height: 1.48;
-}
-
-/* Journal: one editorial composition + a compact reading index. */
-.journalSection {
-  padding: clamp(3rem, 5vw, 5rem);
-  background: var(--paper);
-}
-.journalEditorial {
-  display: grid;
-  grid-template-columns: minmax(19rem, .82fr) minmax(0, 1.18fr);
-  min-height: 34rem;
-  border-top: .5px solid var(--line);
-  border-bottom: .5px solid var(--line);
-}
-.journalLead {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(2rem, 4vw, 4rem) clamp(2rem, 4vw, 4rem) clamp(2rem, 4vw, 4rem) 0;
-  border-right: .5px solid var(--line);
-}
-.journalLead h2 {
-  margin-top: .6rem;
-  max-width: 12ch;
-  font-size: clamp(2.25rem, 3vw, 3.8rem);
-  line-height: 1;
-  letter-spacing: -.018em;
-}
-.journalDescription {
-  max-width: 30rem;
-  margin-top: 1rem !important;
-  color: var(--muted);
-  font-size: .82rem;
-  line-height: 1.72;
-}
-.journalFeatureCopy {
-  margin-top: auto;
-  padding-top: clamp(2rem, 5vw, 4rem);
-}
-.journalFeatureCopy h3 {
-  max-width: 13ch;
-  margin-top: .55rem;
-  font-size: clamp(1.7rem, 2.1vw, 2.5rem);
-  line-height: 1.03;
-  letter-spacing: -.012em;
-}
-.journalFeatureCopy .textLink { margin-top: 1.15rem; }
-.journalFeatureImage {
-  position: relative;
-  min-height: 34rem;
-  overflow: hidden;
-  background: var(--cream);
-}
-.journalList {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-bottom: .5px solid var(--line);
-}
-.journalList li { border-right: .5px solid var(--line); }
-.journalList li:last-child { border-right: 0; }
-.journalList a {
-  min-height: 9.25rem;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: .75rem;
-  align-items: end;
-  padding: 1rem 1.05rem;
-  transition: background 160ms ease, color 160ms ease;
-}
-.journalList a:hover {
-  color: var(--green);
-  background: rgba(208, 224, 179, .2);
-}
-.journalList h3 { font-size: 1.12rem; line-height: 1.06; }
-.journalList p {
-  margin-top: .4rem !important;
-  color: var(--muted);
-  font-size: .64rem;
-  line-height: 1.5;
-}
-
-@media (max-width: 1050px) {
-  .tasteSpectrum { grid-template-columns: minmax(15rem, .7fr) minmax(0, 1.3fr); }
-  .tasteIntro { border-bottom: .5px solid var(--line); }
-  .tasteList { border-right: 0; }
-  .spectrumPlate {
-    grid-column: 1 / -1;
-    border-top: .5px solid var(--line);
-  }
-  .modernRitualSteps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .journalEditorial { grid-template-columns: minmax(17rem, .76fr) minmax(0, 1.24fr); }
-}
-
-@media (max-width: 720px) {
-  .tasteSpectrum { grid-template-columns: 1fr; }
-  .tasteIntro,
-  .tasteList,
-  .spectrumPlate {
-    padding: 1.35rem 1rem;
-    border-right: 0;
-  }
-  .tasteIntro { border-bottom: 0; }
-  .tasteList { border-top: .5px solid var(--line); }
-  .spectrumPlate { grid-column: auto; border-top: .5px solid var(--line); }
-  .tasteCard { grid-template-columns: 4rem minmax(0, 1fr) auto; }
-  .tasteCard figure { width: 4rem; }
-  .axisRow {
-    grid-template-columns: 1fr;
-    gap: .55rem;
-    padding-block: .7rem;
-  }
-  .modernRitualSteps { grid-template-columns: 1fr 1fr; }
-  .modernRitualStep { min-height: 7.4rem; }
-  .journalSection { padding: 2rem 1rem; }
-  .journalEditorial { grid-template-columns: 1fr; min-height: 0; }
-  .journalLead {
-    padding: 2rem 0;
-    border-right: 0;
-    border-bottom: .5px solid var(--line);
-  }
-  .journalLead h2 { max-width: 11ch; }
-  .journalFeatureCopy { margin-top: 2.5rem; padding-top: 0; }
-  .journalFeatureImage { min-height: 24rem; }
-  .journalList { grid-template-columns: 1fr 1fr; }
-}
-
-@media (max-width: 480px) {
-  .modernRitualSteps { grid-template-columns: 1fr; }
-  .journalList { grid-template-columns: 1fr; }
-  .journalList li { border-right: 0; border-bottom: .5px solid var(--line); }
-}
-
-/* MIE MATCHA CONTENT LAYOUT V4.1 END */
-
-/* MIE MATCHA JOURNAL MINDFUL V4.3 START */
-.journalSection {
-  padding: clamp(3.25rem, 5vw, 5.5rem);
-  background: var(--paper);
-  border-top: .5px solid var(--line);
-}
-
-.journalMagazine {
-  display: grid;
-  grid-template-columns: minmax(21rem, .78fr) minmax(0, 1.22fr);
-  gap: clamp(1.5rem, 3vw, 2.75rem);
-  align-items: stretch;
-}
-
-.journalCopyColumn {
-  min-width: 0;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-  padding-block: clamp(.5rem, 1vw, 1rem);
-}
-
-.journalHeading {
-  padding-right: clamp(0rem, 2vw, 1.5rem);
-}
-
-.journalHeading h2 {
-  margin-top: .65rem;
-  max-width: 13ch;
-  font-family: var(--serif);
-  font-size: clamp(2.55rem, 3.7vw, 4.75rem);
-  font-weight: 500;
-  line-height: .96;
-  letter-spacing: -.022em;
-  word-break: keep-all;
-  overflow-wrap: normal;
-  hyphens: none;
-  text-wrap: pretty;
-}
-
-.journalHeading > p:last-child {
-  max-width: 34rem;
-  margin-top: 1rem !important;
-  color: var(--muted);
-  font-size: clamp(.78rem, .72rem + .12vw, .9rem);
-  line-height: 1.75;
-}
-
-.journalFeatureNote {
-  position: relative;
-  align-self: end;
-  min-height: 15rem;
-  padding: clamp(1.5rem, 2.5vw, 2.3rem);
-  border: .5px solid var(--line);
-  background: rgba(244, 241, 235, .62);
-  overflow: hidden;
-}
-
-.journalFeatureNote::after {
-  content: "";
-  position: absolute;
-  right: -2.5rem;
-  bottom: -3rem;
-  width: 12rem;
-  height: 12rem;
-  border: .5px solid rgba(49, 92, 67, .16);
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 2rem rgba(49, 92, 67, .025);
-  pointer-events: none;
-}
-
-.journalFeatureNote h3 {
-  position: relative;
-  z-index: 1;
-  max-width: 14ch;
-  margin-top: .6rem;
-  font-family: var(--serif);
-  font-size: clamp(1.7rem, 2.2vw, 2.75rem);
-  font-weight: 500;
-  line-height: 1.02;
-  letter-spacing: -.015em;
-  word-break: keep-all;
-  overflow-wrap: normal;
-  hyphens: none;
-}
-
-.journalFeatureNote > p:not(.eyebrow) {
-  position: relative;
-  z-index: 1;
-  max-width: 29rem;
-  margin-top: .8rem !important;
-  color: var(--muted);
-  font-size: .76rem;
-  line-height: 1.7;
-}
-
-.journalFeatureNote .textLink {
-  position: relative;
-  z-index: 1;
-  margin-top: 1.15rem;
-}
-
-.journalHeroMedia {
-  position: relative;
-  min-width: 0;
-  min-height: clamp(31rem, 44vw, 42rem);
-  overflow: hidden;
-  border: .5px solid var(--line);
-  background: #f8f7f2;
-}
-
-.journalHeroImage {
-  object-fit: contain;
-  object-position: center;
-  image-rendering: auto;
-}
-
-.journalHeroCaption {
-  position: absolute;
-  right: 1rem;
-  bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: .18rem;
-  padding: .55rem .7rem;
-  color: var(--brown);
-  background: rgba(244, 241, 235, .9);
-  border: .5px solid var(--line-light);
-  font-family: var(--sans);
-  font-size: .55rem;
-  line-height: 1.35;
-  letter-spacing: .08em;
-}
-
-.journalReadingGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
-  margin-top: clamp(1rem, 1.8vw, 1.5rem);
-  border-top: .5px solid var(--line);
-  border-left: .5px solid var(--line);
-}
-
-.journalReadingGrid > li {
-  min-width: 0;
-  border-right: .5px solid var(--line);
-  border-bottom: .5px solid var(--line);
-}
-
-.journalReadingCard {
-  position: relative;
-  height: 100%;
-  min-height: 10.5rem;
-  display: grid;
-  grid-template-columns: 5.4rem minmax(0, 1fr) auto;
-  gap: .9rem;
-  align-items: stretch;
-  padding: .85rem;
-  background: rgba(244, 241, 235, .38);
-  transition: background 160ms ease, color 160ms ease;
-}
-
-.journalReadingCard:hover,
-.journalReadingCard:focus-visible {
-  background: rgba(208, 224, 179, .34);
-  color: var(--green);
-}
-
-.journalReadingThumb {
-  position: relative;
-  width: 100%;
-  min-height: 8.75rem;
-  overflow: hidden;
-  background: var(--cream);
-}
-
-.journalReadingCopy {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.journalReadingIndex {
-  margin-bottom: .42rem;
-  color: var(--green);
-  font-size: .56rem;
-  font-weight: 600;
-  letter-spacing: .08em;
-  font-variant-numeric: tabular-nums;
-}
-
-.journalReadingCard h3 {
-  max-width: 14ch;
-  font-family: var(--serif);
-  font-size: clamp(1.2rem, 1.08rem + .25vw, 1.48rem);
-  font-weight: 500;
-  line-height: 1.03;
-  word-break: keep-all;
-  overflow-wrap: normal;
-  hyphens: none;
-}
-
-.journalReadingCard p {
-  margin-top: .45rem !important;
-  color: var(--muted);
-  font-size: .63rem;
-  line-height: 1.55;
-}
-
-.journalReadingArrow {
-  align-self: start;
-  margin-top: .1rem;
-}
-
-@media (max-width: 1050px) {
-  .journalSection { padding: clamp(2.75rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem); }
-  .journalMagazine { grid-template-columns: minmax(18rem, .88fr) minmax(0, 1.12fr); gap: 1.4rem; }
-  .journalHeading h2 { font-size: clamp(2.4rem, 5vw, 3.65rem); }
-  .journalHeroMedia { min-height: clamp(28rem, 50vw, 36rem); }
-  .journalReadingGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (max-width: 720px) {
-  .journalSection { padding: 2.6rem .75rem; }
-  .journalMagazine { grid-template-columns: 1fr; }
-  .journalCopyColumn { gap: 1.15rem; }
-  .journalHeading h2 { max-width: 12ch; font-size: clamp(2.35rem, 12vw, 3.5rem); line-height: .98; }
-  .journalFeatureNote { min-height: auto; padding: 1.3rem; }
-  .journalFeatureNote h3 { max-width: 13ch; font-size: clamp(1.65rem, 8vw, 2.25rem); }
-  .journalHeroMedia { min-height: 0; aspect-ratio: 4 / 5; }
-  .journalHeroCaption { right: .65rem; bottom: .65rem; }
-  .journalReadingGrid { grid-template-columns: 1fr; }
-  .journalReadingCard { min-height: 8.75rem; grid-template-columns: 4.8rem minmax(0, 1fr) auto; padding: .7rem; }
-  .journalReadingThumb { min-height: 7.25rem; }
-}
-
-@media (max-width: 430px) {
-  .journalReadingCard { grid-template-columns: 4.2rem minmax(0, 1fr) auto; gap: .7rem; }
-  .journalReadingThumb { min-height: 6.6rem; }
-  .journalReadingCard p { font-size: .6rem; }
-}
-/* MIE MATCHA JOURNAL MINDFUL V4.3 END */
-
-/* MIE MATCHA PRODUCT MEDIA CONTRAST V4.4 START */
-.productCard {
-  background: var(--paper);
-}
-
-.productMedia {
-  position: relative;
-  isolation: isolate;
-  background: #d8e3c7;
-  border-bottom: 0.5px solid var(--line);
-  transition: background-color 220ms ease;
-}
-
-.productMedia::before {
-  content: "";
-  position: absolute;
-  inset: clamp(0.55rem, 1vw, 0.85rem);
-  z-index: 0;
-  border: 0.5px solid rgba(59, 44, 25, 0.12);
-  pointer-events: none;
-}
-
-.productImage {
-  z-index: 1;
-  object-fit: contain;
-  padding: 9%;
-  image-rendering: auto;
-}
-
-.productCard:hover .productMedia,
-.productCard:focus-within .productMedia {
-  background: #d1ddb9;
-}
-
-@media (max-width: 720px) {
-  .productImage {
-    padding: 8%;
-  }
-}
-/* MIE MATCHA PRODUCT MEDIA CONTRAST V4.4 END */
-
-/* MIE MATCHA TASTE EDITORIAL V4.6 START */
-/*
- * Editorial tasting spread inspired by the approved visual direction.
- * Motion is intentionally limited to transform/opacity and degrades to
- * a fully static layout when view-timeline or motion are unavailable.
- */
-.tasteSpectrum {
-  position: relative;
-  isolation: isolate;
-  display: grid;
-  grid-template-columns: minmax(17rem, .76fr) minmax(0, 1.24fr);
-  grid-template-areas:
-    "intro list"
-    "spectrum spectrum";
-  align-items: stretch;
   overflow: clip;
-  border-top: .5px solid var(--line);
-  border-bottom: .5px solid var(--line);
-  background:
-    radial-gradient(circle at 18% 29%, rgba(208, 224, 179, .18), transparent 28%),
-    color-mix(in srgb, var(--paper) 96%, white 4%);
+  background: var(--paper);
+  box-shadow: 0 0 0 0.5px var(--paper-line);
 }
 
-.tasteSpectrum::after {
-  content: "";
-  position: absolute;
-  left: -7rem;
-  bottom: -7.5rem;
-  z-index: -1;
-  width: min(32vw, 31rem);
-  aspect-ratio: 1.9 / 1;
-  opacity: .16;
-  pointer-events: none;
-  background:
-    radial-gradient(80% 70% at 15% 100%, rgba(49, 92, 67, .16), transparent 63%),
-    radial-gradient(65% 55% at 55% 100%, rgba(59, 44, 25, .11), transparent 66%),
-    radial-gradient(50% 44% at 85% 100%, rgba(117, 163, 91, .13), transparent 70%);
-  filter: blur(.2px);
-}
-
-.tasteIntro {
-  grid-area: intro;
-  position: relative;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: clamp(31rem, 39vw, 43rem);
-  padding: clamp(3rem, 4.7vw, 5.6rem) clamp(2rem, 4.2vw, 4.75rem);
-  border-right: .5px solid var(--line);
-  border-bottom: .5px solid var(--line);
-  overflow: hidden;
-}
-
-.tasteIntro::before {
-  content: "味";
-  position: absolute;
-  left: clamp(1rem, 2.6vw, 2.8rem);
-  bottom: clamp(1.1rem, 2vw, 2rem);
-  z-index: 0;
-  font-family: var(--jp);
-  font-size: clamp(7rem, 12vw, 12.5rem);
-  font-weight: 500;
-  line-height: .8;
-  color: rgba(49, 92, 67, .055);
-  pointer-events: none;
-}
-
-.tasteIntro::after {
-  content: "A  DEEPER  BOWL  ·  A  BRIGHTER  YOU";
-  position: absolute;
-  left: clamp(11rem, 22vw, 17.2rem);
-  bottom: clamp(1.9rem, 2.7vw, 2.9rem);
-  max-width: 8rem;
-  font-family: var(--sans);
-  font-size: .52rem;
-  font-weight: 600;
-  line-height: 1.65;
-  letter-spacing: .2em;
-  color: rgba(59, 44, 25, .46);
-  pointer-events: none;
-}
-
-.tasteIntro > * {
-  position: relative;
-  z-index: 1;
-}
-
-.tasteIntro h2 {
-  margin-top: .75rem;
-  max-width: 9.4ch;
-  font-size: clamp(2.65rem, 4vw, 4.45rem);
-  line-height: .96;
-  letter-spacing: -.028em;
-  text-wrap: balance;
-  word-break: keep-all;
-  overflow-wrap: normal;
-  hyphens: none;
-}
-
-.tasteIntro > p:not(.eyebrow) {
-  max-width: 25rem;
-  margin-top: 1.35rem !important;
-  color: var(--muted);
-  font-size: clamp(.82rem, .76rem + .16vw, .97rem);
-  line-height: 1.8;
-}
-
-.tasteList {
-  grid-area: list;
-  min-width: 0;
-  padding: clamp(1.45rem, 2.2vw, 2.25rem) clamp(1.45rem, 2.6vw, 2.7rem);
-  border-right: 0;
-  border-bottom: .5px solid var(--line);
-  background: rgba(244, 241, 235, .22);
-}
-
-.tasteList li {
-  margin-inline: 0;
-}
-
-.tasteList li + li {
-  border-top: .5px solid var(--line);
-}
-
-.tasteCard {
-  position: relative;
-  z-index: 0;
-  display: grid;
-  grid-template-columns: clamp(5rem, 6.5vw, 7rem) minmax(0, 1fr) auto;
-  gap: clamp(1rem, 1.6vw, 1.5rem);
-  align-items: center;
-  min-height: clamp(7rem, 8vw, 8.8rem);
-  padding: .82rem .35rem;
-  color: inherit;
-  outline: none;
+.coverImage {
+  object-fit: cover;
   transition:
-    color 180ms ease-out,
-    transform 220ms ease-out;
+    transform 520ms cubic-bezier(.22, 1, .36, 1),
+    filter 520ms cubic-bezier(.22, 1, .36, 1);
 }
 
-.tasteCard::before {
-  content: "";
-  position: absolute;
-  inset: .3rem -.72rem;
-  z-index: -1;
-  border: .5px solid transparent;
-  background: rgba(208, 224, 179, 0);
-  transition:
-    background-color 220ms ease-out,
-    border-color 220ms ease-out;
-}
-
-.tasteList li:first-child .tasteCard::before {
-  background: rgba(208, 224, 179, .20);
-  border-color: rgba(49, 92, 67, .06);
-}
-
-.tasteCard:hover::before,
-.tasteCard:focus-visible::before {
-  background: rgba(208, 224, 179, .33);
-  border-color: rgba(49, 92, 67, .13);
-}
-
-.tasteCard:hover,
-.tasteCard:focus-visible {
-  color: var(--green);
-}
-
-.tasteCard:focus-visible {
-  box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px rgba(49, 92, 67, .65);
-}
-
-.tasteCard figure {
-  position: relative;
-  aspect-ratio: 1.32 / 1;
-  overflow: hidden;
-  background: var(--cream);
-  box-shadow: inset 0 0 0 .5px var(--line);
-  transform: translateZ(0);
-  transition: transform 220ms ease-out;
-}
-
-.tasteCard:hover figure,
-.tasteCard:focus-visible figure {
-  transform: translate3d(0, -2px, 0) scale(1.015);
-}
-
-.tasteCard svg {
-  transition: transform 180ms ease-out;
-}
-
-.tasteCard:hover svg,
-.tasteCard:focus-visible svg {
-  transform: translate3d(4px, 0, 0);
-}
-
-.tasteCard h3 {
-  font-size: clamp(1.25rem, 1.05rem + .55vw, 1.72rem);
-  line-height: 1.02;
-  letter-spacing: -.012em;
-  word-break: keep-all;
-  overflow-wrap: normal;
-  hyphens: none;
-}
-
-.tasteCard p {
-  max-width: 32rem;
-  margin-top: .3rem !important;
-  color: var(--muted);
-  font-size: clamp(.65rem, .61rem + .08vw, .72rem);
-  line-height: 1.55;
-}
-
-.spectrumPlate {
-  grid-area: spectrum;
-  min-width: 0;
-  display: grid;
-  grid-template-columns: minmax(16rem, .74fr) minmax(0, 1.26fr);
-  gap: clamp(2rem, 4.5vw, 6rem);
-  align-items: center;
-  margin: 0;
-  padding: clamp(3rem, 4.8vw, 5.6rem) clamp(2rem, 4.4vw, 5rem);
-  background:
-    linear-gradient(90deg, rgba(244, 241, 235, .82), rgba(244, 241, 235, .56)),
-    color-mix(in srgb, var(--cream) 92%, white 8%);
-}
-
-.spectrumCaption {
-  position: relative;
-  min-width: 0;
-  display: grid !important;
-  grid-template-columns: auto minmax(0, 1fr);
-  grid-template-rows: auto auto;
-  column-gap: 1.15rem !important;
-  row-gap: .3rem;
-  align-items: start !important;
-  padding: 0 0 0 clamp(.1rem, .6vw, .5rem) !important;
-  border: 0 !important;
-}
-
-.spectrumCaption::after {
-  content: "FOUR DIMENSIONS · A RICHER UNDERSTANDING OF MATCHA";
-  grid-column: 2;
-  display: block;
-  max-width: 14rem;
-  margin-top: 1.15rem;
-  padding-top: 1rem;
-  border-top: .5px solid var(--line);
-  font-family: var(--sans);
-  font-size: .53rem;
-  font-weight: 600;
-  line-height: 1.8;
-  letter-spacing: .19em;
-  color: rgba(59, 44, 25, .50);
-}
-
-.spectrumKanji {
-  grid-row: 1 / span 2;
-  margin-top: .08rem;
-  font-family: var(--jp);
-  font-size: clamp(3rem, 4.4vw, 5rem);
-  line-height: .9;
-  color: var(--green);
-}
-
-.spectrumCaption > span:not(.spectrumKanji) {
-  align-self: end;
-  font-family: var(--serif);
-  font-size: clamp(2.25rem, 3.3vw, 4rem);
-  line-height: .96;
-  letter-spacing: -.026em;
-  color: var(--brown);
-}
-
-.spectrumCaption > small {
-  grid-column: 2;
-  margin-top: .15rem;
+.eyebrow {
   color: var(--green);
   font-family: var(--sans);
-  font-size: .58rem;
+  font-size: clamp(.58rem, .55rem + .08vw, .68rem);
   font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: .16em;
+  line-height: 1.45;
+  letter-spacing: .15em;
   text-transform: uppercase;
 }
 
-.axisList {
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  width: fit-content;
+  padding-bottom: .24rem;
+  border-bottom: .5px solid currentColor;
+  color: var(--green);
+  font-size: .7rem;
+  font-weight: 700;
+  transition:
+    gap 180ms ease,
+    color 180ms ease;
+}
+
+.textLink:hover,
+.textLink:focus-visible {
+  gap: .82rem;
+  color: var(--clay);
+}
+
+/* ==========================================================
+   TASTE FIRST
+   ========================================================== */
+
+.tasteSpectrum {
+  position: relative;
+  display: grid;
+  grid-template-columns:
+    minmax(17rem, .68fr)
+    minmax(22rem, .88fr)
+    minmax(28rem, 1.18fr);
+  min-height: clamp(44rem, 62vw, 58rem);
+  border-bottom: .5px solid var(--line);
+  background: var(--paper);
+}
+
+.tasteIntro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   min-width: 0;
-  padding-top: 0;
+  padding: clamp(3rem, 5vw, 5.8rem)
+    clamp(1.4rem, 3.5vw, 3.8rem);
+  overflow: hidden;
+  border-right: .5px solid var(--line);
+}
+
+.tasteIntro::after {
+  content: "味";
+  position: absolute;
+  right: -.16em;
+  bottom: -.16em;
+  color: rgba(49, 92, 67, .055);
+  font-family: var(--jp);
+  font-size: clamp(10rem, 18vw, 20rem);
+  line-height: .82;
+  pointer-events: none;
+}
+
+.tasteIntro h2 {
+  position: relative;
+  z-index: 1;
+  max-width: 8.6ch;
+  margin-top: .75rem;
+  font-size: clamp(2.8rem, 4.1vw, 5rem);
+  line-height: .91;
+  letter-spacing: -.027em;
+}
+
+.tasteIntro > p:last-child {
+  position: relative;
+  z-index: 1;
+  max-width: 24rem;
+  margin-top: 1.2rem;
+  color: var(--muted);
+  font-size: clamp(.76rem, .72rem + .1vw, .86rem);
+  line-height: 1.78;
+}
+
+.tasteList {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-right: .5px solid var(--line);
+}
+
+.tasteList > li {
+  flex: 1 1 0;
+  display: flex;
+  border-bottom: .5px solid var(--line-soft);
+}
+
+.tasteList > li:last-child {
+  border-bottom: 0;
+}
+
+.tasteCard {
+  display: grid;
+  grid-template-columns: clamp(4.8rem, 6vw, 6.5rem) minmax(0, 1fr) auto;
+  gap: clamp(.85rem, 1.4vw, 1.35rem);
+  align-items: center;
+  width: 100%;
+  min-height: 8.3rem;
+  padding: .9rem clamp(.9rem, 1.8vw, 1.4rem);
+  transition:
+    background 200ms ease,
+    padding-left 200ms ease;
+}
+
+.tasteCard figure {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: .5px solid var(--line);
+  background: var(--cream);
+}
+
+.tasteCard h3 {
+  font-size: clamp(1.3rem, 1.8vw, 1.72rem);
+  line-height: 1;
+}
+
+.tasteCard p {
+  margin-top: .42rem;
+  color: var(--muted);
+  font-size: .66rem;
+  line-height: 1.55;
+}
+
+.tasteCard > svg {
+  color: var(--green);
+  transition: transform 180ms ease;
+}
+
+@media (hover: hover) {
+  .tasteCard:hover {
+    padding-left: clamp(1.15rem, 2.2vw, 1.85rem);
+    background: rgba(208, 224, 179, .34);
+  }
+
+  .tasteCard:hover figure .coverImage {
+    transform: scale(1.035);
+  }
+
+  .tasteCard:hover > svg {
+    transform: translate(3px, -3px);
+  }
+}
+
+.spectrumPlate {
+  align-self: center;
+  min-width: 0;
+  margin: clamp(1.2rem, 2.8vw, 2.8rem);
+  padding: clamp(1.35rem, 2.4vw, 2.4rem);
+  border: .5px solid var(--line);
+  background: rgba(244, 241, 235, .78);
+}
+
+.spectrumCaption {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  padding-bottom: 1.35rem;
+  border-bottom: .5px solid var(--line);
+}
+
+.spectrumKanji {
+  color: var(--green);
+  font-family: var(--jp);
+  font-size: clamp(2.7rem, 4vw, 4rem);
+  line-height: .86;
+}
+
+.spectrumCaption h2 {
+  margin-top: .22rem;
+  font-size: clamp(2rem, 3vw, 3.4rem);
+  line-height: .94;
+}
+
+.axisList {
+  display: block;
 }
 
 .axisRow {
   display: grid;
-  grid-template-columns: minmax(8.5rem, .31fr) minmax(0, 1fr);
-  gap: clamp(1.2rem, 2vw, 2.2rem);
+  grid-template-columns: minmax(7.5rem, .34fr) minmax(0, 1fr);
+  gap: clamp(1rem, 2vw, 2rem);
   align-items: center;
-  min-height: clamp(5.8rem, 7vw, 7rem);
-  border-bottom: .5px solid var(--line);
+  min-height: 7.2rem;
+  border-bottom: .5px solid var(--line-soft);
 }
 
 .axisRow:last-child {
@@ -1572,18 +311,16 @@
 .axisRow dt strong {
   display: block;
   font-family: var(--serif);
-  font-size: clamp(1.4rem, 1.15rem + .55vw, 1.85rem);
-  line-height: 1.02;
+  font-size: clamp(1.28rem, 1.8vw, 1.7rem);
   font-weight: 500;
+  line-height: 1;
 }
 
 .axisRow dt span {
   display: block;
-  margin-top: .34rem;
+  margin-top: .32rem;
   color: var(--muted);
-  font-family: var(--sans);
-  font-size: .6rem;
-  line-height: 1.4;
+  font-size: .55rem;
 }
 
 .axisRow dd {
@@ -1592,12 +329,10 @@
 
 .axisTrack {
   --axis-x: 50%;
+
   position: relative;
-  height: .46rem;
-  border: .5px solid rgba(59, 44, 25, .39);
-  border-radius: 999px;
-  background: rgba(244, 241, 235, .88) !important;
-  overflow: visible;
+  height: 2px;
+  background: rgba(59, 44, 25, .16);
 }
 
 .axisTrack::before {
@@ -1605,21 +340,31 @@
   position: absolute;
   inset: 0 auto 0 0;
   width: var(--axis-x);
-  border-radius: inherit;
-  background: linear-gradient(90deg, #9caf7f, #80995f);
-  transform: scaleX(1);
   transform-origin: left center;
-  transition: opacity 180ms ease-out;
-}
-
-.axisTrackEmpty::before {
-  display: none;
+  background: var(--matcha);
 }
 
 .axisStart,
 .axisMid,
 .axisEnd {
-  display: none;
+  position: absolute;
+  top: 50%;
+  width: 1px;
+  height: .55rem;
+  transform: translateY(-50%);
+  background: rgba(59, 44, 25, .3);
+}
+
+.axisStart {
+  left: 0;
+}
+
+.axisMid {
+  left: 50%;
+}
+
+.axisEnd {
+  right: 0;
 }
 
 .axisDot,
@@ -1627,308 +372,865 @@
   position: absolute;
   top: 50%;
   left: var(--axis-x);
-  z-index: 2;
-  width: 1.35rem;
-  height: 1.35rem;
+  width: 1rem;
+  height: 1rem;
+  transform: translate(-50%, -50%);
   border-radius: 50%;
-  transform: translate3d(-50%, -50%, 0) scale(1);
-  transition:
-    transform 180ms ease-out,
-    box-shadow 180ms ease-out,
-    background-color 180ms ease-out;
 }
 
 .axisDot {
-  background: #879f68;
-  border: 1px solid rgba(49, 92, 67, .96);
-  box-shadow:
-    0 0 0 3px rgba(244, 241, 235, .8),
-    0 2px 6px rgba(59, 44, 25, .18);
+  border: 1px solid var(--green);
+  background: var(--soft);
 }
 
 .axisMissing {
-  left: 50%;
-  width: 1rem;
-  height: 1rem;
-  border: .5px dashed rgba(59, 44, 25, .46);
+  border: 1px dashed rgba(59, 44, 25, .5);
   background: var(--cream);
-  box-shadow: 0 0 0 4px rgba(244, 241, 235, .72);
 }
 
-.axisRow:hover .axisDot,
-.axisRow:focus-within .axisDot {
-  transform: translate3d(-50%, -50%, 0) scale(1.08);
-  box-shadow:
-    0 0 0 4px rgba(244, 241, 235, .88),
-    0 3px 9px rgba(59, 44, 25, .22);
-}
-
-.axisRow:hover .axisTrack::before,
-.axisRow:focus-within .axisTrack::before {
-  opacity: .84;
+.axisTrackEmpty::before {
+  display: none;
 }
 
 .axisLabels {
   display: flex;
   justify-content: space-between;
-  margin-top: .46rem;
+  margin-top: .52rem;
   color: var(--muted);
-  font-family: var(--sans);
-  font-size: .57rem;
-  line-height: 1.3;
+  font-size: .52rem;
 }
 
 .axisValue {
   display: block;
-  min-height: .9rem;
-  margin-top: .28rem;
-  color: rgba(59, 44, 25, .62);
-  font-family: var(--sans);
-  font-size: .56rem;
-  line-height: 1.4;
+  margin-top: .35rem;
+  color: var(--clay);
+  font-size: .55rem;
   font-variant-numeric: tabular-nums;
 }
 
+/* ==========================================================
+   ORIGIN / TEA CULTURE
+   ========================================================== */
+
+.originStrip {
+  display: grid;
+  grid-template-columns:
+    minmax(20rem, .72fr)
+    minmax(0, 1.28fr);
+  min-height: clamp(40rem, 52vw, 50rem);
+  border-bottom: .5px solid var(--line);
+  background: var(--cream);
+}
+
+.originCopy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: clamp(3.2rem, 5vw, 6rem)
+    clamp(1.4rem, 4vw, 4.5rem);
+}
+
+.originCopy h2 {
+  max-width: 9ch;
+  margin-top: .7rem;
+  font-size: clamp(3rem, 4.7vw, 5.6rem);
+  line-height: .91;
+  letter-spacing: -.03em;
+}
+
+.originCopy > p:not(.eyebrow) {
+  max-width: 30rem;
+  margin-top: 1.15rem;
+  color: var(--muted);
+  font-size: .8rem;
+  line-height: 1.78;
+}
+
+.originCopy .textLink {
+  margin-top: 1.5rem;
+}
+
+.originMosaic {
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) minmax(11rem, .72fr);
+  grid-template-rows: 1fr 1fr;
+  gap: .75rem;
+  min-width: 0;
+  min-height: 100%;
+  padding: clamp(.75rem, 1.6vw, 1.4rem);
+  background: var(--soft);
+}
+
+.originMosaic figure {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border: .5px solid rgba(59, 44, 25, .18);
+  background: var(--paper);
+}
+
+.originLarge {
+  grid-row: 1 / -1;
+}
+
+@media (hover: hover) {
+  .originMosaic figure:hover .coverImage {
+    transform: scale(1.025);
+  }
+}
+
+/* ==========================================================
+   TEA HOUSES / MAKERS INDEX
+   ========================================================== */
+
+.brandSection {
+  padding:
+    clamp(4.5rem, 7vw, 7.5rem)
+    max(1rem, calc((100% - 1380px) / 2));
+  border-bottom: .5px solid var(--line);
+  background: var(--paper);
+}
+
+.brandSection > header {
+  display: grid;
+  grid-template-columns: minmax(10rem, .34fr) minmax(0, .66fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: end;
+  padding-bottom: 1.8rem;
+  border-bottom: .5px solid var(--line);
+}
+
+.brandSection > header h2 {
+  max-width: 12ch;
+  font-size: clamp(2.7rem, 4.2vw, 4.8rem);
+  line-height: .92;
+  letter-spacing: -.028em;
+}
+
+.brandList {
+  width: 100%;
+}
+
+.brandList > li {
+  border-bottom: .5px solid var(--line-soft);
+}
+
+.brandRow {
+  display: grid;
+  grid-template-columns:
+    3rem
+    minmax(0, 1.25fr)
+    minmax(10rem, .55fr)
+    auto;
+  gap: clamp(.8rem, 1.8vw, 1.8rem);
+  align-items: center;
+  min-height: 7rem;
+  padding: .7rem .25rem;
+  transition:
+    background 180ms ease,
+    padding-inline 180ms ease;
+}
+
+.brandIndex {
+  color: var(--muted);
+  font-size: .57rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.brandRow > div {
+  display: flex;
+  flex-direction: column;
+  gap: .16rem;
+  min-width: 0;
+}
+
+.brandRow > div span {
+  color: var(--green);
+  font-family: var(--jp);
+  font-size: .7rem;
+}
+
+.brandRow > div strong {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 2.2vw, 2.15rem);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.brandRow > span:not(.brandIndex):not(.brandAction) {
+  color: var(--muted);
+  font-size: .65rem;
+}
+
+.brandAction {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  color: var(--green);
+  font-size: .62rem;
+  font-weight: 700;
+}
+
+.brandAction svg {
+  transition: transform 180ms ease;
+}
+
+@media (hover: hover) {
+  .brandRow:hover {
+    padding-inline: .9rem;
+    background: rgba(208, 224, 179, .26);
+  }
+
+  .brandRow:hover .brandAction svg {
+    transform: translate(3px, -3px);
+  }
+}
+
+/* ==========================================================
+   BREWING RITUAL
+   ========================================================== */
+
+.modernRitualSection {
+  padding:
+    clamp(4.8rem, 7vw, 7.5rem)
+    max(1rem, calc((100% - 1380px) / 2));
+  overflow: hidden;
+  border-bottom: .5px solid rgba(244, 241, 235, .18);
+  color: var(--cream);
+  background: var(--green-deep);
+}
+
+.modernRitualHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, .48fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: end;
+  padding-bottom: 1.8rem;
+  border-bottom: .5px solid rgba(244, 241, 235, .2);
+}
+
+.modernRitualHeader .eyebrow {
+  color: var(--soft);
+}
+
+.modernRitualHeader h2 {
+  max-width: 11ch;
+  margin-top: .62rem;
+  color: var(--cream);
+  font-size: clamp(2.9rem, 4.6vw, 5.4rem);
+  line-height: .91;
+  letter-spacing: -.03em;
+}
+
+.modernRitualHeader > p {
+  max-width: 28rem;
+  justify-self: end;
+  color: rgba(244, 241, 235, .7);
+  font-size: .77rem;
+  line-height: 1.78;
+}
+
+.modernRitualVisualScroller {
+  margin-top: clamp(1.5rem, 2.6vw, 2.6rem);
+  overflow: hidden;
+}
+
+.modernRitualVisual {
+  position: relative;
+  width: 100%;
+  min-height: clamp(27rem, 43vw, 40rem);
+  overflow: hidden;
+  border: .5px solid rgba(244, 241, 235, .2);
+  background: var(--cream);
+}
+
+.modernRitualArtwork {
+  object-fit: contain;
+  padding: clamp(1rem, 2.4vw, 2.4rem);
+}
+
+.modernRitualSteps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-top: 1.2rem;
+  border-top: .5px solid rgba(244, 241, 235, .2);
+  border-bottom: .5px solid rgba(244, 241, 235, .2);
+}
+
+.modernRitualStep {
+  min-width: 0;
+  min-height: 12rem;
+  padding: 1.1rem;
+  border-left: .5px solid rgba(244, 241, 235, .16);
+  transition:
+    background 200ms ease,
+    transform 200ms ease;
+}
+
+.modernRitualStep:first-child {
+  border-left: 0;
+}
+
+.modernRitualNumber {
+  display: block;
+  color: var(--soft);
+  font-size: .56rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.modernRitualStep h3 {
+  margin-top: 2.4rem;
+  color: var(--cream);
+  font-size: clamp(1.25rem, 1.7vw, 1.65rem);
+  line-height: 1;
+}
+
+.modernRitualStep p {
+  margin-top: .65rem;
+  color: rgba(244, 241, 235, .68);
+  font-size: .64rem;
+  line-height: 1.58;
+}
+
+@media (hover: hover) {
+  .modernRitualStep:hover {
+    transform: translateY(-3px);
+    background: rgba(208, 224, 179, .08);
+  }
+}
+
+/* ==========================================================
+   TEA JOURNAL
+   ========================================================== */
+
+.journalSection {
+  padding:
+    clamp(4.8rem, 7vw, 7.5rem)
+    max(1rem, calc((100% - 1380px) / 2));
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.journalMagazine {
+  display: grid;
+  grid-template-columns: minmax(19rem, .68fr) minmax(0, 1.32fr);
+  min-height: clamp(38rem, 48vw, 47rem);
+  border-bottom: .5px solid var(--line);
+}
+
+.journalCopyColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  padding:
+    clamp(1rem, 2vw, 2rem)
+    clamp(1.4rem, 3.2vw, 3.2rem)
+    clamp(1rem, 2vw, 2rem)
+    0;
+}
+
+.journalHeading h2 {
+  max-width: 10ch;
+  margin-top: .62rem;
+  font-size: clamp(2.7rem, 4.2vw, 4.9rem);
+  line-height: .92;
+  letter-spacing: -.028em;
+}
+
+.journalHeading > p:last-child {
+  max-width: 29rem;
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: .77rem;
+  line-height: 1.76;
+}
+
+.journalFeatureNote {
+  max-width: 31rem;
+  padding-top: 1.4rem;
+  border-top: .5px solid var(--line);
+}
+
+.journalFeatureNote h3 {
+  max-width: 13ch;
+  margin-top: .5rem;
+  font-size: clamp(1.8rem, 2.8vw, 3rem);
+  line-height: .98;
+}
+
+.journalFeatureNote > p:not(.eyebrow) {
+  margin-top: .8rem;
+  color: var(--muted);
+  font-size: .7rem;
+  line-height: 1.65;
+}
+
+.journalFeatureNote .textLink {
+  margin-top: 1.1rem;
+}
+
+.journalHeroMedia {
+  position: relative;
+  min-width: 0;
+  min-height: inherit;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.journalHeroImage {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 650ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.journalHeroCaption {
+  position: absolute;
+  inset: auto 1rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: .65rem;
+  border-top: .5px solid rgba(244, 241, 235, .62);
+  color: var(--cream);
+  font-size: .56rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+@media (hover: hover) {
+  .journalHeroMedia:hover .journalHeroImage {
+    transform: scale(1.018);
+  }
+}
+
+.journalReadingGrid {
+  display: block;
+  margin-top: 1.2rem;
+  border-top: .5px solid var(--line);
+}
+
+.journalReadingGrid > li {
+  border-bottom: .5px solid var(--line-soft);
+}
+
+.journalReadingCard {
+  display: grid;
+  grid-template-columns: clamp(5.4rem, 7vw, 7.4rem) minmax(0, 1fr) auto;
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: center;
+  min-height: 9.5rem;
+  padding: .75rem .25rem;
+  transition:
+    padding-inline 180ms ease,
+    background 180ms ease;
+}
+
+.journalReadingThumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.15;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.journalReadingCopy {
+  min-width: 0;
+}
+
+.journalReadingIndex {
+  display: block;
+  color: var(--green);
+  font-size: .52rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.journalReadingCopy h3 {
+  margin-top: .2rem;
+  font-size: clamp(1.35rem, 2vw, 1.9rem);
+  line-height: 1;
+}
+
+.journalReadingCopy p {
+  max-width: 42rem;
+  margin-top: .42rem;
+  color: var(--muted);
+  font-size: .65rem;
+  line-height: 1.55;
+}
+
+.journalReadingArrow {
+  color: var(--green);
+  transition: transform 180ms ease;
+}
+
+@media (hover: hover) {
+  .journalReadingCard:hover {
+    padding-inline: .8rem;
+    background: rgba(208, 224, 179, .2);
+  }
+
+  .journalReadingCard:hover .journalReadingThumb .coverImage {
+    transform: scale(1.035);
+  }
+
+  .journalReadingCard:hover .journalReadingArrow {
+    transform: translate(3px, -3px);
+  }
+}
+
+/* ==========================================================
+   EDITORIAL MOTION
+   ========================================================== */
+
+@keyframes mieEditorialRise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mieEditorialMedia {
+  from {
+    opacity: .72;
+    transform: scale(.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @supports (animation-timeline: view()) {
-  .tasteIntro h2,
-  .tasteIntro > p:not(.eyebrow) {
-    animation: mieTasteReveal .65s cubic-bezier(.22, 1, .36, 1) both;
-    animation-timeline: view();
-    animation-range: entry 8% cover 32%;
-  }
-
-  .tasteCard {
-    animation: mieTasteRowReveal .52s cubic-bezier(.22, 1, .36, 1) both;
-    animation-timeline: view();
-    animation-range: entry 4% cover 23%;
-  }
-
-  .tasteList li:nth-child(2) .tasteCard { animation-range: entry 7% cover 26%; }
-  .tasteList li:nth-child(3) .tasteCard { animation-range: entry 10% cover 29%; }
-  .tasteList li:nth-child(4) .tasteCard { animation-range: entry 13% cover 32%; }
-
-  .spectrumCaption {
-    animation: mieTasteReveal .62s cubic-bezier(.22, 1, .36, 1) both;
+  .tasteIntro,
+  .originCopy,
+  .brandSection > header,
+  .modernRitualHeader,
+  .journalHeading {
+    animation: mieEditorialRise .6s cubic-bezier(.22, 1, .36, 1) both;
     animation-timeline: view();
     animation-range: entry 8% cover 28%;
   }
 
-  .axisRow {
-    animation: mieTasteRowReveal .48s cubic-bezier(.22, 1, .36, 1) both;
+  .originMosaic,
+  .modernRitualVisual,
+  .journalHeroMedia {
+    animation: mieEditorialMedia .7s cubic-bezier(.22, 1, .36, 1) both;
     animation-timeline: view();
-    animation-range: entry 4% cover 24%;
-  }
-
-  .axisRow .axisTrack::before {
-    animation: mieTasteRailReveal .72s cubic-bezier(.22, 1, .36, 1) both;
-    animation-timeline: view();
-    animation-range: entry 8% cover 30%;
-  }
-
-  .axisRow .axisDot,
-  .axisRow .axisMissing {
-    animation: mieTasteDotReveal .42s ease-out both;
-    animation-timeline: view();
-    animation-range: entry 18% cover 34%;
+    animation-range: entry 6% cover 30%;
   }
 }
 
-@keyframes mieTasteReveal {
-  from { opacity: 0; transform: translate3d(0, 18px, 0); }
-  to { opacity: 1; transform: translate3d(0, 0, 0); }
-}
+/* ==========================================================
+   TABLET
+   ========================================================== */
 
-@keyframes mieTasteRowReveal {
-  from { opacity: 0; transform: translate3d(0, 12px, 0); }
-  to { opacity: 1; transform: translate3d(0, 0, 0); }
-}
-
-@keyframes mieTasteRailReveal {
-  from { opacity: .25; transform: scaleX(0); }
-  to { opacity: 1; transform: scaleX(1); }
-}
-
-@keyframes mieTasteDotReveal {
-  from { opacity: 0; transform: translate3d(-50%, -50%, 0) scale(.72); }
-  to { opacity: 1; transform: translate3d(-50%, -50%, 0) scale(1); }
-}
-
-@media (max-width: 1099px) {
+@media (max-width: 1180px) {
   .tasteSpectrum {
-    grid-template-columns: minmax(14.5rem, .58fr) minmax(0, 1.12fr);
-  }
-
-  .tasteIntro {
-    min-height: 31rem;
-    padding: 2.8rem 1.8rem;
-  }
-
-  .tasteIntro h2 {
-    max-width: 8.6ch;
-    font-size: clamp(2.4rem, 4.7vw, 3.5rem);
-  }
-
-  .tasteIntro::after {
-    left: auto;
-    right: 1.5rem;
-    max-width: 6.5rem;
-  }
-
-  .tasteList {
-    padding-inline: 1.25rem;
-  }
-
-  .tasteCard {
-    grid-template-columns: 4.4rem minmax(0, 1fr) auto;
-    min-height: 6.8rem;
-    gap: .9rem;
-  }
-
-  .spectrumPlate {
-    grid-template-columns: minmax(13.5rem, .58fr) minmax(0, 1.42fr);
-    gap: 2rem;
-    padding: 3rem 1.8rem;
-  }
-
-  .spectrumCaption > span:not(.spectrumKanji) {
-    font-size: clamp(1.9rem, 3.8vw, 3rem);
-  }
-}
-
-@media (max-width: 759px) {
-  .tasteSpectrum {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "intro"
-      "list"
-      "spectrum";
-  }
-
-  .tasteSpectrum::after {
-    display: none;
-  }
-
-  .tasteIntro {
+    grid-template-columns: minmax(17rem, .72fr) minmax(0, 1.28fr);
     min-height: auto;
-    padding: 2.7rem 1rem 3.8rem;
-    border-right: 0;
   }
 
-  .tasteIntro::before {
-    left: auto;
-    right: .6rem;
-    bottom: .45rem;
-    font-size: 7.4rem;
-  }
-
-  .tasteIntro::after {
-    display: none;
-  }
-
-  .tasteIntro h2 {
-    max-width: 10ch;
-    font-size: clamp(2.65rem, 12.2vw, 4rem);
-    line-height: .96;
-  }
-
-  .tasteIntro > p:not(.eyebrow) {
-    max-width: 28rem;
-    margin-top: 1rem !important;
-    font-size: .82rem;
-    line-height: 1.72;
-  }
-
-  .tasteList {
-    padding: .45rem 1rem;
+  .tasteIntro {
     border-bottom: .5px solid var(--line);
   }
 
-  .tasteCard {
-    grid-template-columns: 4.5rem minmax(0, 1fr) auto;
-    gap: .8rem;
-    min-height: 6.4rem;
-    padding: .7rem .1rem;
-  }
-
-  .tasteCard::before {
-    inset: .28rem -.35rem;
-  }
-
-  .tasteCard h3 {
-    font-size: 1.18rem;
-  }
-
-  .tasteCard p {
-    font-size: .62rem;
+  .tasteList {
+    border-right: 0;
   }
 
   .spectrumPlate {
+    grid-column: 1 / -1;
+    width: auto;
+    margin: 0;
+    border-width: .5px 0 0;
+  }
+
+  .originStrip {
+    grid-template-columns: minmax(18rem, .78fr) minmax(0, 1.22fr);
+  }
+
+  .brandSection > header {
     grid-template-columns: 1fr;
-    gap: 2.2rem;
-    padding: 2.8rem 1rem 3rem;
+    gap: .8rem;
   }
 
-  .spectrumCaption {
-    grid-template-columns: auto minmax(0, 1fr);
-    padding-left: 0 !important;
+  .modernRitualHeader {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
-  .spectrumKanji {
-    font-size: clamp(3.25rem, 13vw, 4.6rem);
+  .modernRitualHeader > p {
+    justify-self: start;
   }
 
-  .spectrumCaption > span:not(.spectrumKanji) {
-    font-size: clamp(2.15rem, 9.2vw, 3.4rem);
+  .modernRitualSteps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .spectrumCaption::after {
-    max-width: 12rem;
+  .modernRitualStep:nth-child(4) {
+    border-left: 0;
+    border-top: .5px solid rgba(244, 241, 235, .16);
+  }
+
+  .modernRitualStep:nth-child(5) {
+    border-top: .5px solid rgba(244, 241, 235, .16);
+  }
+
+  .journalMagazine {
+    grid-template-columns: minmax(18rem, .76fr) minmax(0, 1.24fr);
+  }
+}
+
+/* ==========================================================
+   MOBILE / SMALL TABLET
+   ========================================================== */
+
+@media (max-width: 820px) {
+  .root {
+    overflow-x: clip;
+    padding-inline: 0;
+  }
+
+  .tasteSpectrum {
+    display: block;
+  }
+
+  .tasteIntro {
+    min-height: 25rem;
+    padding: 3.6rem 1rem;
+    border-right: 0;
+  }
+
+  .tasteIntro h2 {
+    max-width: 9ch;
+    font-size: clamp(2.55rem, 10.8vw, 3.8rem);
+  }
+
+  .tasteList {
+    border-top: .5px solid var(--line);
+  }
+
+  .tasteCard {
+    grid-template-columns: 4.7rem minmax(0, 1fr) auto;
+    min-height: 7rem;
+    padding: .85rem 1rem;
+  }
+
+  .spectrumPlate {
+    padding: 2rem 1rem 2.4rem;
   }
 
   .axisRow {
-    grid-template-columns: minmax(6.5rem, .34fr) minmax(0, 1fr);
-    gap: .9rem;
-    min-height: 5.8rem;
+    grid-template-columns: 1fr;
+    gap: .75rem;
+    min-height: 0;
+    padding-block: 1.15rem;
   }
 
-  .axisRow dt strong {
-    font-size: 1.3rem;
+  .originStrip {
+    display: block;
+    min-height: 0;
+  }
+
+  .originCopy {
+    padding: 4rem 1rem 3rem;
+  }
+
+  .originCopy h2 {
+    max-width: 10ch;
+    font-size: clamp(2.6rem, 11vw, 3.8rem);
+  }
+
+  .originMosaic {
+    grid-template-columns: 1.3fr .7fr;
+    min-height: 31rem;
+    padding: .7rem;
+  }
+
+  .brandSection {
+    padding: 4rem 1rem;
+  }
+
+  .brandSection > header h2 {
+    font-size: clamp(2.55rem, 10.5vw, 3.7rem);
+  }
+
+  .brandRow {
+    grid-template-columns: 2.1rem minmax(0, 1fr) auto;
+    min-height: 6.3rem;
+  }
+
+  .brandRow > span:not(.brandIndex):not(.brandAction) {
+    display: none;
+  }
+
+  .brandAction {
+    font-size: 0;
+    gap: 0;
+  }
+
+  .brandAction svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .modernRitualSection {
+    padding: 4rem 1rem;
+  }
+
+  .modernRitualHeader h2 {
+    font-size: clamp(2.55rem, 10.5vw, 3.8rem);
+  }
+
+  .modernRitualVisual {
+    min-height: 20rem;
+  }
+
+  .modernRitualSteps {
+    display: block;
+  }
+
+  .modernRitualStep,
+  .modernRitualStep:nth-child(4),
+  .modernRitualStep:nth-child(5) {
+    display: grid;
+    grid-template-columns: 2.4rem minmax(0, 1fr);
+    min-height: 0;
+    padding: 1.2rem 0;
+    border-top: 0;
+    border-left: 0;
+    border-bottom: .5px solid rgba(244, 241, 235, .16);
+  }
+
+  .modernRitualStep h3 {
+    margin-top: 0;
+  }
+
+  .modernRitualNumber {
+    grid-row: 1 / span 2;
+    padding-top: .16rem;
+  }
+
+  .modernRitualStep > div {
+    grid-column: 2;
+  }
+
+  .journalSection {
+    padding: 4rem 1rem;
+  }
+
+  .journalMagazine {
+    display: block;
+    min-height: 0;
+  }
+
+  .journalCopyColumn {
+    padding: 0 0 2rem;
+  }
+
+  .journalHeading h2 {
+    font-size: clamp(2.55rem, 10.5vw, 3.8rem);
+  }
+
+  .journalFeatureNote {
+    margin-top: 3rem;
+  }
+
+  .journalHeroMedia {
+    min-height: 30rem;
+  }
+
+  .journalReadingCard {
+    grid-template-columns: 5.5rem minmax(0, 1fr) auto;
+    gap: .9rem;
+    min-height: 8rem;
+  }
+
+  .journalReadingCopy p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 }
 
 @media (max-width: 430px) {
+  .tasteIntro {
+    min-height: 23rem;
+  }
+
   .tasteCard {
     grid-template-columns: 4rem minmax(0, 1fr) auto;
   }
 
-  .axisRow {
-    grid-template-columns: 1fr;
-    gap: .65rem;
-    padding-block: .95rem;
+  .spectrumCaption {
+    gap: .75rem;
   }
 
-  .axisLabels,
-  .axisValue {
-    font-size: .54rem;
+  .spectrumKanji {
+    font-size: 2.8rem;
+  }
+
+  .originMosaic {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 18rem 9rem;
+    min-height: 0;
+  }
+
+  .originLarge {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .brandRow {
+    gap: .65rem;
+  }
+
+  .brandRow > div strong {
+    font-size: 1.45rem;
+  }
+
+  .modernRitualVisual {
+    min-height: 16rem;
+  }
+
+  .journalHeroMedia {
+    min-height: 24rem;
+  }
+
+  .journalReadingCard {
+    grid-template-columns: 4.7rem minmax(0, 1fr) auto;
   }
 }
 
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
+
 @media (prefers-reduced-motion: reduce) {
-  .tasteSpectrum *,
-  .tasteSpectrum *::before,
-  .tasteSpectrum *::after {
-    animation: none !important;
-    transition-duration: .01ms !important;
-    scroll-behavior: auto !important;
+  .root *,
+  .root *::before,
+  .root *::after {
+    animation: none;
+    scroll-behavior: auto;
+    transition-duration: .01ms;
   }
 
-  .tasteCard:hover figure,
-  .tasteCard:focus-visible figure,
-  .tasteCard:hover svg,
-  .tasteCard:focus-visible svg,
-  .axisRow:hover .axisDot,
-  .axisRow:focus-within .axisDot {
+  .coverImage,
+  .journalHeroImage,
+  .journalReadingArrow,
+  .brandAction svg,
+  .tasteCard > svg,
+  .modernRitualStep {
     transform: none;
   }
 }
-/* MIE MATCHA TASTE EDITORIAL V4.6 END */

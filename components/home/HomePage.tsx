@@ -276,31 +276,11 @@ export async function HomePage() {
         collectionDescription={c.collectionDescription}
         exploreProfileLabel={c.exploreProfile}
         referencePriceLabel={c.referencePrice}
-        autoSwitchLabel={vi ? " " : " "}
+        autoSwitchLabel={vi ? "Ảnh giới thiệu" : "Introduction image"}
+        previousLabel={vi ? "Hồ sơ matcha trước" : "Previous matcha profile"}
+        nextLabel={vi ? "Hồ sơ matcha tiếp theo" : "Next matcha profile"}
         dragLabel={vi ? "Kéo để xem hồ sơ tiếp theo" : "Drag to view the next profile"}
       />
-
-        <section className={styles.originStrip} aria-labelledby="origin-title">
-          <div className={styles.originCopy}>
-            <p className={styles.eyebrow}>{c.storyEyebrow}</p>
-            <h2 id="origin-title">{c.storyTitle}</h2>
-            <p>{c.storyDescription}</p>
-            <Link href={withLocalePath("/brands", lng)} className={styles.textLink}>
-              {c.discoverOrigin}<ArrowUpRight aria-hidden="true" size={14} />
-            </Link>
-          </div>
-          <div className={styles.originMosaic}>
-            <figure className={styles.originLarge}>
-              <Image src={media.storyLandscape.url} alt={mediaAlt(media.storyLandscape, vi)} fill quality={90} sizes="(max-width: 1050px) 100vw, 520px" className={styles.coverImage} style={{ objectPosition: media.storyLandscape.position }} />
-            </figure>
-            <figure>
-              <Image src={media.spectrumBowl.url} alt={mediaAlt(media.spectrumBowl, vi)} fill quality={90} sizes="260px" className={styles.coverImage} style={{ objectPosition: media.spectrumBowl.position }} />
-            </figure>
-            <figure>
-              <Image src={media.ritualPoster.url} alt={mediaAlt(media.ritualPoster, vi)} fill quality={90} sizes="260px" className={styles.coverImage} style={{ objectPosition: media.ritualPoster.position }} />
-            </figure>
-          </div>
-        </section>
 
         <section className={styles.tasteSpectrum} aria-labelledby="taste-title">
           <div className={styles.tasteIntro}>
@@ -330,7 +310,7 @@ export async function HomePage() {
           </ul>
 
           <figure className={styles.spectrumPlate} aria-labelledby="spectrum-title">
-            <figcaption>
+            <figcaption className={styles.spectrumCaption}>
               <span className={styles.spectrumKanji}>味</span>
               <div>
                 <p className={styles.eyebrow}>{vi ? "ĐỌC PROFILE" : "READ THE PROFILE"}</p>
@@ -373,15 +353,38 @@ export async function HomePage() {
           </figure>
         </section>
 
+        <section className={styles.originStrip} aria-labelledby="origin-title">
+          <div className={styles.originCopy}>
+            <p className={styles.eyebrow}>{c.storyEyebrow}</p>
+            <h2 id="origin-title">{c.storyTitle}</h2>
+            <p>{c.storyDescription}</p>
+            <Link href={withLocalePath("/brands", lng)} className={styles.textLink}>
+              {c.discoverOrigin}<ArrowUpRight aria-hidden="true" size={14} />
+            </Link>
+          </div>
+          <div className={styles.originMosaic}>
+            <figure className={styles.originLarge}>
+              <Image src={media.storyLandscape.url} alt={mediaAlt(media.storyLandscape, vi)} fill quality={90} sizes="(max-width: 1050px) 100vw, 520px" className={styles.coverImage} style={{ objectPosition: media.storyLandscape.position }} />
+            </figure>
+            <figure>
+              <Image src={media.spectrumBowl.url} alt={mediaAlt(media.spectrumBowl, vi)} fill quality={90} sizes="260px" className={styles.coverImage} style={{ objectPosition: media.spectrumBowl.position }} />
+            </figure>
+            <figure>
+              <Image src={media.ritualPoster.url} alt={mediaAlt(media.ritualPoster, vi)} fill quality={90} sizes="260px" className={styles.coverImage} style={{ objectPosition: media.ritualPoster.position }} />
+            </figure>
+          </div>
+        </section>
+
         <section className={styles.brandSection} aria-labelledby="brands-title">
           <header>
             <p className={styles.eyebrow}>{vi ? "TEA HOUSES" : "TEA HOUSES"}</p>
             <h2 id="brands-title">{c.brandsTitle}</h2>
           </header>
           <ul className={styles.brandList}>
-            {visibleBrands.map((brand) => (
+            {visibleBrands.map((brand, index) => (
               <li key={brand.id}>
                 <Link href={withLocalePath(`/brands/${brand.slug}`, lng)} className={styles.brandRow}>
+                  <span className={styles.brandIndex}>{String(index + 1).padStart(2, "0")}</span>
                   <div>
                     {brand.japanese_name ? <span>{brand.japanese_name}</span> : null}
                     <strong>{brand.name}</strong>
@@ -402,11 +405,11 @@ export async function HomePage() {
             <p>{c.ritualDescription}</p>
           </header>
 
-          <div className={styles.modernRitualVisualScroller} tabIndex={0} aria-label={vi ? "Minh hoa cach pha matcha hien dai" : "Modern matcha preparation illustration"}>
+          <div className={styles.modernRitualVisualScroller} tabIndex={0} aria-label={vi ? "Minh họa cách pha matcha hiện đại" : "Modern matcha preparation illustration"}>
             <figure className={styles.modernRitualVisual}>
               <Image
                 src="/images/home/ritual/modern-matcha-ritual.webp"
-                alt={vi ? "Minh hoa cac buoc pha matcha hien dai" : "Illustrated modern matcha preparation steps"}
+                alt={vi ? "Minh họa các bước pha matcha hiện đại" : "Illustrated modern matcha preparation steps"}
                 fill
                 quality={90}
                 sizes="(max-width: 720px) 900px, (max-width: 1050px) 100vw, 1320px"
